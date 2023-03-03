@@ -9,15 +9,25 @@ import CountryDetails from "./components/CountryDetails"
 
 function App() {
   const [countries, setCountries] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(()=>{
     fetch("https://ih-countries-api.herokuapp.com/countries")
     .then((response) => response.json())
-    .then((data) => setCountries(data));
-  }, [])
+    .then((data) => {
+      setCountries(data)}
+  )}, [])
+
+  useEffect(()=>{
+    if(countries.length){
+      setIsLoading(false)
+    }
+  },[countries])
+
 
   return (
-  <div className="App">
+    <>
+    {!isLoading && <div className="App">
     <Navbar/>
     <div className="row justify-content-evenly">
       <div className="col-5">
@@ -29,7 +39,8 @@ function App() {
       </Routes>
       </div>
     </div>
-  </div>
+  </div>}
+  </>
   )
 }
 export default App;

@@ -10,7 +10,7 @@ export default function CountryDetails(props){
         let result = props.data.find((item)=>item.alpha3Code === id)
         setCountry(result)
     }, [id])
-    console.log(country)
+
 return(
     <>
     <div className="card mt-5" style={{width: "40rem", border: "0px"}}>
@@ -30,7 +30,7 @@ return(
     </tr>
     <tr>
       <th scope="row">Borders</th>
-      {country && country.borders.map((item)=>{return (<tr><td><Link to={`/${item}`} >{item}</Link></td></tr>)})}
+      {country && country.borders.map((item)=>{return (<tr key={item}><td><Link to={`/${item}`} >{item}</Link></td></tr>)})}
     </tr>
     </tbody>
     </table>
